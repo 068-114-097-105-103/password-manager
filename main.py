@@ -2,7 +2,7 @@ import re
 import os
 
 # base directory where all the passwords are stored
-BASE_DIR = "C:\\Users\\nick\\Documents\\passwords"
+BASE_DIR = "YOUR DIRECTORY PATH HERE"
 
 # generate a list of all the files in the directory
 FILES = os.listdir(BASE_DIR)
