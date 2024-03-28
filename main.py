@@ -2,14 +2,33 @@ import re
 import os
 
 # base directory where all the passwords are stored
-BASE_DIR = "YOUR DIRECTORY PATH HERE"
+BASE_DIR = "DIRECTORY_PATH_HERE"
 
 # generate a list of all the files in the directory
 FILES = os.listdir(BASE_DIR)
 
 
 # main function to search for the site name in all the files
-def main(site_name):
+def main():
+    i = input("Press 1 to search for a site\nPress 2 to add a new record\n")
+    if i == "1":
+        site = input("Enter the site name: ")
+        find(site)
+    elif i == "2":
+        add()
+
+
+def add():
+    site = input("Enter the site name: ")
+    url = input("Enter the URL: ")
+    username = input("Enter the username: ")
+    password = input("Enter the password: ")
+    with open(BASE_DIR + "\\" + "My-pass.csv", "a") as f:
+        f.write(f"\n{site},{url},{username},{password}")
+    print("Record added successfully.")
+
+
+def find(site_name):
     # dictionary to store the data
     d = {}
     # loop through all the files
@@ -33,18 +52,17 @@ def main(site_name):
         print("-------------------")
         for key, data in d.items():
             print("Site: ", key)
-            print("Username: ", data[0])
-            print("Password: ", data[1])
-            print("URL: ", data[2])
+            print("URL: ", data[0])
+            print("Username: ", data[1])
+            print("password: ", data[2])
             print("-------------------")
 
 
 # main loop
 print("Welcome to the Password Manager press Ctrl+C to exit the program.")
 while True:
-    site = input("Enter the site name: ")
     try:
-        main(site)
+        main()
     except Exception as e:
         print("Error: ", e)
-        break
+        continue
